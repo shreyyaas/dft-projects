@@ -1,31 +1,13 @@
-# DFT Projects — VLSI Design for Testability
-> Self-directed portfolio targeting semiconductor internships.  
-> Tools: EDA Playground · Icarus Verilog
+### Results
 
----
+| Patterns used | Faults simulated | Detected | Coverage |
+|---|---|---|---|
+| 32 (exhaustive) | 14 | 14 | 100% |
+| 4 (manual) | 11 | 10 | 90.9% |
 
-## ✅ Project 1 — Scan Chain + Fault Injection
-**Concepts:** Scan design, shift-capture-shift, SA1 fault detection  
-**Tools:** Verilog, EDA Playground, Icarus Verilog 12.0
-
-### What this demonstrates
-- Designed a scan-enabled DFF with SE-controlled 2:1 MUX
-- Chained 8 scan FFs and verified full shift→capture→shift cycle
-- Injected SA1 fault on d[0] (wire shorted to VDD)
-- Proved fault is invisible during scan shift-in but detected
-  after capture phase — exactly how ATE detects manufacturing defects
-
-### Fault injection results
-| | Fault-free | SA1 on d[0] |
-|---|---|---|
-| Capture response | `00000000` | `00000001` |
-| Shift-out | `00000000` | `00000001` |
-| **Result** | — | **DETECTED ✓** |
-
-![Fault injection waveform](project1-scan-chain/fault_injection_waveform.png)
-
----
-
-## 🔄 Project 2 — ISCAS-85 Fault Simulator *(coming soon)*
-## 🔄 Project 3 — LFSR + MISR Logic BIST Core *(coming soon)*
-## 🔄 Project 4 — DFT-Aware 4-bit ALU *(coming soon)*
+### Key finding
+Manual pattern `I3 SA0` escaped with 4 patterns — I2=0 masked
+the fault at G2 in all 4 patterns. The exhaustive set catches it
+via pattern `01100` where I2=1, I3=1 simultaneously excites and
+propagates the fault. This demonstrates exactly why ATPG is needed
+over manual pattern selection.
