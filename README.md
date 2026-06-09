@@ -196,9 +196,3 @@ manual ATPG, shift-capture-shift verification
 | EDA Playground + Icarus Verilog | Verilog simulation and waveform viewing |
 | Python 3 | Fault simulation scripting |
 | GitHub | Version control and portfolio |
-
-## Roadmap
-- [x] Project 1 — Scan chain + fault injection
-- [x] Project 2 — ISCAS-85 fault simulator
-- [ ] Project 3 — LFSR + MISR BIST core
-- [ ] Project 4 — DFT-aware ALU capstone
